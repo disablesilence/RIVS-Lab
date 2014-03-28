@@ -114,8 +114,8 @@ namespace Employee
 
             for (int n = 1; n <= i; n++)
             {
-                Console.WriteLine("Введите должность № {0}", i);
-                try { e1[i - 1] = Console.ReadLine(); }
+                Console.WriteLine("Введите должность № {0}", n);
+                try { e1[n - 1] = Console.ReadLine(); }
                 catch (Exception e) { Console.WriteLine("{0}", e); }
             }
             
