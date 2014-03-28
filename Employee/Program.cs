@@ -16,26 +16,38 @@ namespace Employee
 
     public interface EmpInt
     {
-        string Name { set; get; }
-        string this[int i] { set; get; }
-        int Age { set; get; }
-        int Workxp { set; get; }
+        void GetOlder(int new_age);
+        void GetNewPost(string new_post);
+        void GetMoreXP();
+    }
+
+    public interface AmpInt 
+    {
+        void GetOlder(int years, bool x);
+        void GetMoreXP();
+        void GetNewPost(string  new_post);
+        
     }
     
-    public class Employee:BaseEmployee,EmpInt
-    {              
-        public string Name
-        {	            
-            set
-            {
-                name = value;
-            }
-            get 
-            { 
-                return (name); 
-            }
+    public class Employee:BaseEmployee,EmpInt,AmpInt
+    {
+        public void GetOlder(int new_age) { age = Convert.ToInt32(new_age); }
+        public void GetOlder(int years, bool x) { age = age + Convert.ToInt32(years); }
+        
+        public void GetNewPost(string new_post)
+        {
+            int i;
+            i = count_post;
+            count_post++;
+            post[i] = new_post;             
         }
-
+        
+        void EmpInt.GetMoreXP() { workxp = workxp + 1; }
+        void AmpInt.GetMoreXP() { workxp = workxp + 2; }
+        public void XPUp() { ((EmpInt)this).GetMoreXP(); }
+        public void XPUp2() { ((AmpInt)this).GetMoreXP(); }
+        
+        
         public string this[int i]
         {	
             set
@@ -51,30 +63,9 @@ namespace Employee
                 else return (post[0]);
             }
         }
-
-        public int Age
-        {
-            set
-            {
-                age = value;
-            }
-            get
-            {
-                return (age);
-            }
-        }
-
-        public int Workxp
-        {
-            set
-            {
-                workxp = value;
-            }
-            get
-            {
-                return (workxp);
-            }
-        }       
+    public string Name { set; get; }
+    public int Age { set; get; }
+    public int Workxp { set; get; }
     } 
         
     class Program
